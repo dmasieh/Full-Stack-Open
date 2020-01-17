@@ -1,0 +1,32 @@
+note over browser:
+    Browser Load Notes Page
+end note
+
+
+browser->server: HTTP GET: https://fullstack-exampleapp.herokuapp.com/spa
+server-->browser: HTML-code: spa.html
+note over server:
+    Responded with Page Content(HTML), 
+end note
+
+
+browser->server: HTTP GET: https://fullstack-exampleapp.herokuapp.com/main.css
+server-->browser: CSS Stylesheet: spa.html: line 5: <link rel="stylesheet" type="text/css" href="/main.css" />
+note over server:
+    Responded with Stylesheet(CSS),
+end note
+
+
+browser->server: HTTP GET: https://fullstack-exampleapp.herokuapp.com/spa.js
+server-->browser: Client Side JS: spa.html: line 6: <script type="text/javascript" src="spa.js"></script>
+note over server:
+    Responded with Client Script(JS),
+end note
+
+
+browser->server: HTTP GET: https://fullstack-exampleapp.herokuapp.com/data.json
+server-->browser: JSON DataSet: spa.js: line 30: xhttp.open("GET", "/data.json", true), Content-Length: 1049
+note over server:
+    Responded with a Copy of Data.Json 
+    Before Filling out the form
+end note

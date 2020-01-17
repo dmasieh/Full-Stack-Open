@@ -1,0 +1,65 @@
+note over browser:
+    Browser Load Notes Page
+end note
+
+
+browser->server: HTTP GET: https://fullstack-exampleapp.herokuapp.com/spa
+server-->browser: HTML-code: spa.html
+note over server:
+    Responded with Page Content(HTML), 
+end note
+
+
+browser->server: HTTP GET: https://fullstack-exampleapp.herokuapp.com/main.css
+server-->browser: CSS Stylesheet: spa.html: line 5: <link rel="stylesheet" type="text/css" href="/main.css" />
+note over server:
+    Responded with Stylesheet(CSS),
+end note
+
+
+browser->server: HTTP GET: https://fullstack-exampleapp.herokuapp.com/spa.js
+server-->browser: Client Side JS: spa.html: line 6: <script type="text/javascript" src="spa.js"></script>
+note over server:
+    Responded with Client Script(JS),
+end note
+
+
+browser->server: HTTP GET: https://fullstack-exampleapp.herokuapp.com/data.json
+server-->browser: JSON DataSet: spa.js: line 30: xhttp.open("GET", "/data.json", true), Content-Length: 1049
+note over server:
+    Responded with a Copy of Data.Json 
+    Before Filling out the form
+end note
+
+
+note over browser:
+    End-User fills text box
+    and clicks Save [Submit],
+    Submitting: In DevTools ->
+    Network -> new_note_spa ->
+    Request Payload: {content:...}
+end note
+
+
+browser->server: HTTP POST: https://fullstack-exampleapp.herokuapp.com/new_note_spa
+browser->server: In Background: spa.js line 42: xhttpForPost.setRequestHeader("Content-type", "application/json")
+server-->browser: Response Headers: No Location because of No Redirect, Size: 26
+note over server:
+    Posts Data to Server, then
+    HTTP Code 201 Created: 
+    Still at /spa, no redirect
+end note
+
+note over browser:
+    Browser asynchronously Displays 
+    List With New Item Appended 
+    thanks to spa.js line 46:
+    window.onload = function (e) {}
+end note:
+
+note over browser:
+    You would need to manually
+    refresh page to see new content
+    length of data.json: 1446
+end note:
+
