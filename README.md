@@ -39,17 +39,17 @@
         <td rowspan="3">Part 1<br /><br />Introduction to React </td>
         <td>1.1 - 1.5</td>
         <td>courseinfo app</td>
-        <td></td>
+        <td>01/05/2020</td>
     </tr>
     <tr>
         <td>1.6 - 1.11</td>
         <td>unicafe app</td>
-        <td></td>
+        <td>01/05/2020</td>
     </tr>
     <tr>
         <td>1.12 - 1.14</td>
         <td>anecdotes app</td>
-        <td></td>
+        <td>01/05/2020</td>
     </tr>
     <tr>
         <td rowspan="4">Part 2<br /><br />Communicating with server </td>
