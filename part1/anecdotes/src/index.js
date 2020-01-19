@@ -4,16 +4,29 @@ import ReactDOM from 'react-dom'
 const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
 
 const App = ({ anecdotes }) => {
-  const [selected, setSelected] = useState(0)
+    const random = () => Math.floor(Math.random() * 6)
+    const [selected, setSelected] = useState(random)
+    const [vote, setVote] = useState(new Array(anecdotes.length).fill(0))
+    //display a random anecdote upon entry of application
 
-  return (
-    <div>
-        <h3>Anecdote of the Day</h3>
-        {anecdotes[selected]}
-        <br />
-        <Button text='Next Anecdote' onClick={ () => setSelected( Math.floor(Math.random() * 6) ) } />
-    </div>
-  )
+    const handleClick = () => {
+        const voteCopy = [...vote]
+        //console.log(voteCopy)
+        voteCopy[selected] += 1
+        //console.log(voteCopy[selected])
+        setVote(voteCopy)
+        //console.log(vote)
+    }
+
+    return (
+        <div>
+            <h3>Anecdote of the Day</h3>
+            <p>{anecdotes[selected]}</p>
+            <p><b>This Anecdote has: {vote[selected]} votes</b></p>
+            <Button text='Next Anecdote' onClick={ () => setSelected(random) } />
+            <Button text='Vote this Anecdote' onClick={ () => handleClick() } />
+        </div>
+    )
 }
 
 const anecdotes = [
