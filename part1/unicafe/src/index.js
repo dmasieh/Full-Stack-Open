@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 // Refactored button into a component to be called later
 const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
 
-const Statistic = ({ category, count }) => <p><b>{category}:</b> {count}</p>
+const Statistic = ({ category, count }) => <tr><td>{category}</td><td>{count}</td></tr>
 
 // create a separate component for the statistics
 const Statistics = ({ good, bad, neutral }) => {
@@ -13,23 +13,30 @@ const Statistics = ({ good, bad, neutral }) => {
     // conditionally display statistics based on feedback given
     if(good >= 1 && (neutral + bad === 0)){
         return (
-            <>	
-                <Statistic category='Good Votes' count={good} />
-				<p>So far, there's only Good Votes, a vote average of 1 and Positive Feedback!</p>
-            </>
+            <table border="1">
+				<tbody>
+                    <Statistic category='Good Votes' count={good} />
+                    <tr><td colSpan="2">
+                        So far, there's only Good Votes, a vote <br />
+                        average of 1 and Positive Feedback!
+                    </td></tr>
+                </tbody>
+            </table>
         )
     } else if(total === 0) {
         return <h1>No Feedback Given Yet</h1>
     } else {
         return (
-            <>
-                <Statistic category='Good Votes' count={good} />
-                <Statistic category='Neutral Votes' count={neutral} />
-                <Statistic category='Bad Votes' count={bad} />
-                <Statistic category='Total Votes' count={total} />
-                <Statistic category='Average Votes' count={(good + bad * -1) / total} />
-                <Statistic category='% of Positive Feedback' count={((good / total) * 100) +'%'} />
-            </>
+            <table border="1">
+				<tbody>
+                    <Statistic category='Good Votes' count={good} />
+                    <Statistic category='Neutral Votes' count={neutral} />
+                    <Statistic category='Bad Votes' count={bad} />
+                    <Statistic category='Total Votes' count={total} />
+                    <Statistic category='Average Votes' count={(good + bad * -1) / total} />
+                    <Statistic category='% of Positive Feedback' count={((good / total) * 100) +'%'} />
+                </tbody>
+            </table>
         )
     }
 }
