@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom'
 // Refactored button into a component to be called later
 const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
 
+const Statistic = ({ category, count }) => <p><b>{category}:</b> {count}</p>
+
 // create a separate component for the statistics
 const Statistics = ({ good, bad, neutral }) => {
     const total = good + bad + neutral
@@ -12,7 +14,7 @@ const Statistics = ({ good, bad, neutral }) => {
     if(good >= 1 && (neutral + bad === 0)){
         return (
             <>	
-				<p>Good Votes: {good}</p>
+                <Statistic category='Good Votes' count={good} />
 				<p>So far, there's only Good Votes, a vote average of 1 and Positive Feedback!</p>
             </>
         )
@@ -21,12 +23,12 @@ const Statistics = ({ good, bad, neutral }) => {
     } else {
         return (
             <>
-                <p>Good votes: {good}</p>
-                <p>Neutral votes: {neutral}</p>
-                <p>Bad votes: {bad}</p>
-                <p>All Votes: {total}</p>
-                <p>Average Votes: {(good + bad * -1) / total}</p>
-                <p>Percent Positive: {(good / total) * 100}%</p>
+                <Statistic category='Good Votes' count={good} />
+                <Statistic category='Neutral Votes' count={neutral} />
+                <Statistic category='Bad Votes' count={bad} />
+                <Statistic category='Total Votes' count={total} />
+                <Statistic category='Average Votes' count={(good + bad * -1) / total} />
+                <Statistic category='% of Positive Feedback' count={((good / total) * 100) +'%'} />
             </>
         )
     }
